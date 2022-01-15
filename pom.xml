@@ -1,50 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.efsavage</groupId>
+<artifactId>hello-world-war</artifactId>
+<version>2.0.0</version>
+<packaging>war</packaging>
+<name>Hello World Web Application Repository</name>
+<description>Simplest possible Java Webapp</description>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.datica</groupId>
-	<artifactId>java-war-deploy-example</artifactId>
-	<packaging>jar</packaging>
-	<version>0.1-SNAPSHOT</version>
-	<name>Demo for deploying WAR and JAR files</name>
+<profiles>
+<profile>
+<id>kishor</id>
+<activation>
+<activeByDefault>true</activeByDefault>
+</activation>
+<properties>
+<!-- Optional URL to server. Default value is http://localhost:9000 -->
+<sonar.host.url>http://localhost:9000</sonar.host.url>
+<sonar.projectKey>myapp</sonar.projectKey>
+<sonar.login>96c01f8025cc6fb8e91055f4d05f06fd99b123ca</sonar.login>
+ <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+ <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}\jacoco-it.exec</sonar.coverage.jacoco.xmlReportPaths>
+</properties>
+</profile>
+</profiles>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<configuration>
-  <annotationProcessorPaths>
-    <path>
-      <groupId>org.sample</groupId>
-      <artifactId>sample-annotation-processor</artifactId>
-      <version>1.2.3</version>
-    </path>
-    <!-- ... more ... -->
-  </annotationProcessorPaths>
+<build>
+<plugins>
+<plugin>
+<groupId>org.mortbay.jetty</groupId>
+<artifactId>jetty-maven-plugin</artifactId>
+<version>8.1.5.v20120716</version>
+<configuration>
+<scanIntervalSeconds>0</scanIntervalSeconds>
 </configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.github.jsimone</groupId>
-									<artifactId>webapp-runner</artifactId>
-									<version>8.5.20.1</version>
-									<destFileName>webapp-runner.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+</plugin>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-war-plugin</artifactId>
+<version>2.1.1</version>
+</plugin>
+ <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
+<plugin>
+  <groupId>org.jacoco</groupId>
+  <artifactId>jacoco-maven-plugin</artifactId>
+  <version>0.8.6</version>
+  <executions>
+  <execution>
+      <id>prepare-agent</id>
+            <goals>
+            <goal>prepare-agent</goal>
+            </goals>
+      </execution>
+      <execution>
+            <id>report</id>
+            <phase>test</phase>
+               <goals>
+                <goal>report</goal>
+               </goals>
+        </execution>
+    </executions>
+ </plugin>
+</plugins>
+</build>
 
 </project>
