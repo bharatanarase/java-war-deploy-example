@@ -15,9 +15,16 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.3</version>
+				<configuration>
+  <annotationProcessorPaths>
+    <path>
+      <groupId>org.sample</groupId>
+      <artifactId>sample-annotation-processor</artifactId>
+      <version>1.2.3</version>
+    </path>
+    <!-- ... more ... -->
+  </annotationProcessorPaths>
+</configuration>
 				<executions>
 					<execution>
 						<phase>package</phase>
