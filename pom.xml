@@ -15,6 +15,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <activeByDefault>true</activeByDefault>
 </activation>
 <properties>
+ <properties>
+ <maven.compiler.source>1.8</maven.compiler.source>
+ <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
 <!-- Optional URL to server. Default value is http://localhost:9000 -->
 <sonar.host.url>http://localhost:9000</sonar.host.url>
 <sonar.projectKey>myapp</sonar.projectKey>
